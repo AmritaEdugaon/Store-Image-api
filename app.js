@@ -25,7 +25,7 @@ const upload=multer({storage});
 
 app.post("/uploads",upload.single("image"),(request,response)=>{
     const imageName=request.file.filename;
-    const insertsql="INSERT INTO images (images_name)VALUES(?)";
+    const insertsql="INSERT INTO images (path)VALUES(?)";
 
     db.query(insertsql,[imageName],(error,result)=>{
         if(error)return response.status(500).json({
@@ -39,9 +39,9 @@ app.post("/uploads",upload.single("image"),(request,response)=>{
     })
 })
 
-app.post("/uploads",upload.array("images"),(request,response)=>{
-    const imageName=request.file.filename;
-    const insertsql="INSERT INTO images (images_name)VALUES(?)"
+app.post("/uploads-multiple",upload.array("images"),(request,response)=>{
+    const imageName=request.files.filename;
+    const insertsql="INSERT INTO images (path)VALUES(?)"
 
     db.query(insertsql,[imageName],(error,result)=>{
         if(error)return response.status(500).json({
@@ -57,5 +57,5 @@ app.post("/uploads",upload.array("images"),(request,response)=>{
 
 app.listen(PORT,(error)=>{
     if(error)return console.log("error"+error);
-    console.log("Server running on http://localhost:${PORT}");
+ console.log(`Server running on http://localhost:${PORT}`);
 });
