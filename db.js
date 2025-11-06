@@ -1,17 +1,21 @@
 const mysql= require("mysql2");
 
-const db=mysql.createConnection({
+const pool=mysql.createPool({
     host:"sql12.freesqldatabase.com",
     user:"sql12806189",
     database:"sql12806189",
-    password:"pkUffdcwrR"
+    password:"pkUffdcwrR",
+    connectionLimit:10
 });
 
-db.connect((error)=>{
+pool.getConnection((error,connection)=>{
     if(error){
         console.log("database connection error"+error);
     }
-    else{console.log("database connection successfull")}
+    else{
+        console.log("database connection successfull");
+        connection.release();
+    }
 });
 
-module.exports=db;
+module.exports=pool;
