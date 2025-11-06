@@ -4,7 +4,7 @@ const db=mysql.createConnection({
     host:"sql12.freesqldatabase.com",
     user:"sql12806189",
     database:"sql12806189",
-    password:"1491658"
+    password:"pkUffdcwrR"
 });
 
 db.connect((error)=>{

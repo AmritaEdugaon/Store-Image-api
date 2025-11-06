@@ -53,7 +53,7 @@ app.post("/uploads",upload.array("images"),(request,response)=>{
             image_url: `http://localhost:3000/uploads/${imageName}`
         });
     })
-})
+});
 
 app.listen(PORT,(error)=>{
     if(error)return console.log("error"+error);
